@@ -1,17 +1,17 @@
-const svg = d3.select("#chart"),
+const svg = d3.select("#chart"), // Select svg element and get its width and height
       width = +svg.attr("width"),
       height = +svg.attr("height");
 
-const margin = { top: 20, right: 30, bottom: 30, left: 60 },
+const margin = { top: 20, right: 30, bottom: 30, left: 60 },// Set margins and inner dimensions for the chart area
       innerWidth = width - margin.left - margin.right,
       innerHeight = height - margin.top - margin.bottom;
 
-const tooltip = d3.select("#tooltip");
+const tooltip = d3.select("#tooltip");// Tooltip for showing info on hover
 
-const g = svg.append("g")
+const g = svg.append("g")// Create a group for the chart
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// ✅ Full dataset including language
+// Full dataset including language
 let rawData = [ 
   { "year": 2000, "name": "Aryan", "gender": "male", "count": 1200, "language": "Hindi" },
   { "year": 2001, "name": "Aryan", "gender": "male", "count": 1350, "language": "Hindi" },
@@ -61,6 +61,7 @@ let rawData = [
 
 ];
 
+
 function drawChart(genderFilter = "all", languageFilter = "all") {
   const data = rawData.filter(d =>
     (genderFilter === "all" || d.gender === genderFilter) &&
@@ -79,7 +80,7 @@ function drawChart(genderFilter = "all", languageFilter = "all") {
       year: y,
       values: data.filter(d => d.year === y)
     })));
-
+// Define scales for x and y axes
   const x = d3.scaleLinear()
     .domain(d3.extent(years))
     .range([0, innerWidth]);
@@ -93,14 +94,14 @@ function drawChart(genderFilter = "all", languageFilter = "all") {
     .range(d3.schemeCategory10);
 
   g.selectAll("*").remove();
-
+// Draw the x-axis and y-axis
   g.append("g")
     .attr("transform", `translate(0,${innerHeight})`)
     .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
   g.append("g")
     .call(d3.axisLeft(y));
-
+// Draw the stacked area chart
   g.selectAll(".area")
     .data(stackedData)
     .enter().append("path")
@@ -112,7 +113,7 @@ function drawChart(genderFilter = "all", languageFilter = "all") {
       .y1(d => y(d[1]))
     )
     .on("mousemove", function(event, d) {
-      const [mx] = d3.pointer(event);
+      const [mx] = d3.pointer(event);  // Show tooltip on hover
       const year = Math.round(x.invert(mx));
       const name = d.key;
       const match = rawData.find(r => r.year === year && r.name === name);
