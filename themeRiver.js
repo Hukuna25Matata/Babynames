@@ -11,68 +11,61 @@ const tooltip = d3.select("#tooltip");
 const g = svg.append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-let rawData = [
-  
-  { "year": 2000, "name": "Aryan", "gender": "male", "count": 1200 },
-  { "year": 2001, "name": "Aryan", "gender": "male", "count": 1350 },
-  { "year": 2002, "name": "Aryan", "gender": "male", "count": 1600 },
-  { "year": 2000, "name": "Anjali", "gender": "female", "count": 900 },
-  { "year": 2001, "name": "Anjali", "gender": "female", "count": 1100 },
-  { "year": 2002, "name": "Anjali", "gender": "female", "count": 950 },
-  { "year": 2000, "name": "Kabir", "gender": "male", "count": 700 },
-  { "year": 2001, "name": "Kabir", "gender": "male", "count": 800 },
-  { "year": 2002, "name": "Kabir", "gender": "male", "count": 850 },
-  { "year": 2000, "name": "Lakshmi", "gender": "female", "count": 1200 },
-  { "year": 2001, "name": "Lakshmi", "gender": "female", "count": 1300 },
-  { "year": 2002, "name": "Lakshmi", "gender": "female", "count": 1400 },
-  { "year": 2000, "name": "Venkatesh", "gender": "male", "count": 750 },
-  { "year": 2001, "name": "Venkatesh", "gender": "male", "count": 800 },
-  { "year": 2002, "name": "Venkatesh", "gender": "male", "count": 850 },
-  { "year": 2000, "name": "Harini", "gender": "female", "count": 870 },
-  { "year": 2001, "name": "Harini", "gender": "female", "count": 920 },
-  { "year": 2002, "name": "Harini", "gender": "female", "count": 970 },
-  { "year": 2000, "name": "Pranav", "gender": "male", "count": 1100 },
-  { "year": 2001, "name": "Pranav", "gender": "male", "count": 1200 },
-  { "year": 2002, "name": "Pranav", "gender": "male", "count": 1250 },
-  { "year": 2000, "name": "Kavya", "gender": "female", "count": 1300 },
-  { "year": 2001, "name": "Kavya", "gender": "female", "count": 1400 },
-  { "year": 2002, "name": "Kavya", "gender": "female", "count": 1500 },
-  { "year": 2000, "name": "Rajesh", "gender": "male", "count": 950 },
-  { "year": 2001, "name": "Rajesh", "gender": "male", "count": 1000 },
-  { "year": 2002, "name": "Rajesh", "gender": "male", "count": 1050 },
-  { "year": 2000, "name": "Sruthi", "gender": "female", "count": 990 },
-  { "year": 2001, "name": "Sruthi", "gender": "female", "count": 1050 },
-  { "year": 2002, "name": "Sruthi", "gender": "female", "count": 1100 },
-  { "year": 2000, "name": "Rahul", "gender": "male", "count": 1400 },
-  { "year": 2001, "name": "Rahul", "gender": "male", "count": 1500 },
-  { "year": 2002, "name": "Rahul", "gender": "male", "count": 1600 },
-  { "year": 2000, "name": "Aishwarya", "gender": "female", "count": 1250 },
-  { "year": 2001, "name": "Aishwarya", "gender": "female", "count": 1350 },
-  { "year": 2002, "name": "Aishwarya", "gender": "female", "count": 1450 },
-  { "year": 2000, "name": "Bharath", "gender": "male", "count": 850 },
-  { "year": 2001, "name": "Bharath", "gender": "male", "count": 950 },
-  { "year": 2002, "name": "Bharath", "gender": "male", "count": 1050 },
-  { "year": 2000, "name": "Deepika", "gender": "female", "count": 1150 },
-  { "year": 2001, "name": "Deepika", "gender": "female", "count": 1250 },
-  { "year": 2002, "name": "Deepika", "gender": "female", "count": 1350 },
-  { "year": 2000, "name": "Siddharth", "gender": "male", "count": 920 },
-  { "year": 2001, "name": "Siddharth", "gender": "male", "count": 1020 },
-  { "year": 2002, "name": "Siddharth", "gender": "male", "count": 1120 },
-  { "year": 2000, "name": "Meera", "gender": "female", "count": 950 },
-  { "year": 2001, "name": "Meera", "gender": "female", "count": 1050 },
-  { "year": 2002, "name": "Meera", "gender": "female", "count": 1150 },
-  { "year": 2000, "name": "Arjun", "gender": "male", "count": 1300 },
-  { "year": 2001, "name": "Arjun", "gender": "male", "count": 1400 },
-  { "year": 2002, "name": "Arjun", "gender": "male", "count": 1500 },
-  { "year": 2000, "name": "Sanvi", "gender": "female", "count": 1200 },
-  { "year": 2001, "name": "Sanvi", "gender": "female", "count": 1300 },
-  { "year": 2002, "name": "Sanvi", "gender": "female", "count": 1400 }
-
+// ✅ Full dataset including language
+let rawData = [ 
+  { "year": 2000, "name": "Aryan", "gender": "male", "count": 1200, "language": "Hindi" },
+  { "year": 2001, "name": "Aryan", "gender": "male", "count": 1350, "language": "Hindi" },
+  { "year": 2002, "name": "Aryan", "gender": "male", "count": 1600, "language": "Hindi" },
+  { "year": 2000, "name": "Anjali", "gender": "female", "count": 900, "language": "Hindi" },
+  { "year": 2001, "name": "Anjali", "gender": "female", "count": 1100, "language": "Hindi" },
+  { "year": 2002, "name": "Anjali", "gender": "female", "count": 950, "language": "Hindi" },
+  { "year": 2000, "name": "Kabir", "gender": "male", "count": 700, "language": "Hindi" },
+  { "year": 2001, "name": "Kabir", "gender": "male", "count": 800, "language": "Hindi" },
+  { "year": 2002, "name": "Kabir", "gender": "male", "count": 850, "language": "Hindi" },
+  { "year": 2000, "name": "Lakshmi", "gender": "female", "count": 1200, "language": "Tamil" },
+  { "year": 2001, "name": "Lakshmi", "gender": "female", "count": 1300, "language": "Tamil" },
+  { "year": 2002, "name": "Lakshmi", "gender": "female", "count": 1400, "language": "Tamil" },
+  { "year": 2000, "name": "Venkatesh", "gender": "male", "count": 750, "language": "Telugu" },
+  { "year": 2001, "name": "Venkatesh", "gender": "male", "count": 800, "language": "Telugu" },
+  { "year": 2002, "name": "Venkatesh", "gender": "male", "count": 850, "language": "Telugu" },
+  { "year": 2000, "name": "Harini", "gender": "female", "count": 870, "language": "Tamil" },
+  { "year": 2001, "name": "Harini", "gender": "female", "count": 920, "language": "Tamil" },
+  { "year": 2002, "name": "Harini", "gender": "female", "count": 970, "language": "Tamil" },
+  { "year": 2000, "name": "Pranav", "gender": "male", "count": 1100, "language": "Telugu" },
+  { "year": 2001, "name": "Pranav", "gender": "male", "count": 1200, "language": "Telugu" },
+  { "year": 2002, "name": "Pranav", "gender": "male", "count": 1250, "language": "Telugu" },
+  { "year": 2000, "name": "Kavya", "gender": "female", "count": 1300, "language": "Telugu" },
+  { "year": 2001, "name": "Kavya", "gender": "female", "count": 1400, "language": "Telugu" },
+  { "year": 2002, "name": "Kavya", "gender": "female", "count": 1500, "language": "Telugu" },
+  { "year": 2000, "name": "Rajesh", "gender": "male", "count": 950, "language": "Hindi" },
+  { "year": 2001, "name": "Rajesh", "gender": "male", "count": 1000, "language": "Hindi" },
+  { "year": 2002, "name": "Rajesh", "gender": "male", "count": 1050, "language": "Hindi" },
+  { "year": 2000, "name": "Sruthi", "gender": "female", "count": 990, "language": "Tamil" },
+  { "year": 2001, "name": "Sruthi", "gender": "female", "count": 1050, "language": "Tamil" },
+  { "year": 2002, "name": "Sruthi", "gender": "female", "count": 1100, "language": "Tamil" },
+  { "year": 2000, "name": "Rahul", "gender": "male", "count": 1400, "language": "Hindi" },
+  { "year": 2001, "name": "Rahul", "gender": "male", "count": 1500, "language": "Hindi" },
+  { "year": 2002, "name": "Rahul", "gender": "male", "count": 1600, "language": "Hindi" },
+  { "year": 2000, "name": "Aishwarya", "gender": "female", "count": 1250, "language": "Tamil" },
+  { "year": 2001, "name": "Aishwarya", "gender": "female", "count": 1350, "language": "Tamil" },
+  { "year": 2002, "name": "Aishwarya", "gender": "female", "count": 1450, "language": "Tamil" },
+  { "year": 2000, "name": "Bharath", "gender": "male", "count": 850, "language": "Telugu" },
+  { "year": 2001, "name": "Bharath", "gender": "male", "count": 950, "language": "Telugu" },
+  { "year": 2002, "name": "Bharath", "gender": "male", "count": 1050, "language": "Telugu" },
+  { "year": 2000, "name": "Deepika", "gender": "female", "count": 1150, "language": "Hindi" },
+  { "year": 2001, "name": "Deepika", "gender": "female", "count": 1250, "language": "Hindi" },
+  { "year": 2002, "name": "Deepika", "gender": "female", "count": 1350, "language": "Hindi" },
+  { "year": 2000, "name": "Siddharth", "gender": "male", "count": 920, "language": "Hindi" },
+  { "year": 2001, "name": "Siddharth", "gender": "male", "count": 1020, "language": "Hindi" },
+  { "year": 2002, "name": "Siddharth", "gender": "male", "count": 1120, "language": "Hindi" }
 
 ];
 
-function drawChart(genderFilter = "all") {
-  const data = rawData.filter(d => genderFilter === "all" || d.gender === genderFilter);
+function drawChart(genderFilter = "all", languageFilter = "all") {
+  const data = rawData.filter(d =>
+    (genderFilter === "all" || d.gender === genderFilter) &&
+    (languageFilter === "all" || d.language === languageFilter)
+  );
 
   const names = Array.from(new Set(data.map(d => d.name)));
   const years = Array.from(new Set(data.map(d => d.year))).sort();
@@ -119,7 +112,7 @@ function drawChart(genderFilter = "all") {
       .y1(d => y(d[1]))
     )
     .on("mousemove", function(event, d) {
-      const [mx, my] = d3.pointer(event);
+      const [mx] = d3.pointer(event);
       const year = Math.round(x.invert(mx));
       const name = d.key;
       const match = rawData.find(r => r.year === year && r.name === name);
@@ -128,7 +121,7 @@ function drawChart(genderFilter = "all") {
           .style("left", (event.pageX + 10) + "px")
           .style("top", (event.pageY - 30) + "px")
           .style("display", "block")
-          .html(`<strong>${match.name}</strong><br>Year: ${match.year}<br>Count: ${match.count}`);
+          .html(`<strong>${match.name}</strong><br>Year: ${match.year}<br>Count: ${match.count}<br>Language: ${match.language}`);
       }
     })
     .on("mouseout", () => tooltip.style("display", "none"));
@@ -137,7 +130,11 @@ function drawChart(genderFilter = "all") {
 // Initial draw
 drawChart();
 
-// Filter dropdown
-d3.select("#gender").on("change", function() {
-  drawChart(this.value);
+// Filter dropdown listeners
+d3.select("#gender").on("change", function () {
+  drawChart(this.value, d3.select("#language").node().value);
+});
+
+d3.select("#language").on("change", function () {
+  drawChart(d3.select("#gender").node().value, this.value);
 });
